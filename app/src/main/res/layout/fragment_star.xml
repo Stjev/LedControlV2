@@ -1,14 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragments.modes.StarFragment">
+    android:id="@+id/layout">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="speed"
+            type="Integer" />
+        <variable
+            name="count"
+            type="Integer" />
+        <variable
+            name="speedChanged"
+            type="android.databinding.adapters.SeekBarBindingAdapter.OnProgressChanged" />
+        <variable
+            name="countChanged"
+            type="android.databinding.adapters.SeekBarBindingAdapter.OnProgressChanged" />
+        <variable
+            name="speedListener"
+            type="android.widget.SeekBar.OnSeekBarChangeListener" />
+        <variable
+            name="countListener"
+            type="android.widget.SeekBar.OnSeekBarChangeListener" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/darkBackground"
+        tools:context=".ui.fragments.modes.StarFragment">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/speed"
+            android:textColor="@color/textColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/star_count"
+            android:textColor="@color/textColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <SeekBar
+            android:id="@+id/seekBar2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:max="100"
+            android:min="20"
+            android:onProgressChanged="@{speedChanged}"
+            android:outlineProvider="none"
+            android:progress="@{speed}"
+            android:onStopTrackingTouch="@{speedListener::onStopTrackingTouch}"
+            app:layout_constraintBottom_toBottomOf="@+id/textView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/seekBar5"
+            app:layout_constraintTop_toTopOf="@+id/textView5" />
+
+        <SeekBar
+            android:id="@+id/seekBar5"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="16dp"
+            android:indeterminate="false"
+            android:max="30"
+            android:min="5"
+            android:onProgressChanged="@{countChanged}"
+            android:progress="@{count}"
+            android:onStopTrackingTouch="@{countListener::onStopTrackingTouch}"
+            app:layout_constraintBottom_toBottomOf="@+id/textView8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView6"
+            app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@{String.valueOf(speed) + `%`}"
+            android:textColor="#DFDFDF"
+            app:layout_constraintBottom_toBottomOf="@+id/textView5"
+            app:layout_constraintEnd_toStartOf="@+id/seekBar5"
+            app:layout_constraintTop_toTopOf="@+id/textView5"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@{String.valueOf(count)}"
+            android:textColor="#DFDFDF"
+            app:layout_constraintBottom_toBottomOf="@+id/textView6"
+            app:layout_constraintEnd_toStartOf="@+id/seekBar5"
+            app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

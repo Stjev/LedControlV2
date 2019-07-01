@@ -5,4 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="leds">"Leds   "</string>
     <string name="speed">Speed:</string>
+    <string name="optios">OPTIONS:</string>
+    <string name="mode">Mode:</string>
+    <string name="update">Update</string>
 </resources>

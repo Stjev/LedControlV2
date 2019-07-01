@@ -1,4 +1,4 @@
-package com.stef.arduino.ledcontrolv2.ui.fragments;
+package com.stef.arduino.ledcontrolv2.ui.fragments.modes;
 
 
 import android.arch.lifecycle.ViewModelProviders;
@@ -35,6 +35,7 @@ public class ColorCyclingFragment extends Fragment {
         colorCycleOptionsViewModel = ViewModelProviders.of(getActivity()).get(ColorCycleOptionsViewModel.class);
 
         binding.setSpeedListener(speedListener);
+        binding.setSpeed(colorCycleOptionsViewModel.getSpeed().getValue());
         binding.setProgressChangedListener((SeekBar seekBar, int progress, boolean fromUser) -> binding.setSpeed(progress));
 
         // Inflate the layout for this fragment

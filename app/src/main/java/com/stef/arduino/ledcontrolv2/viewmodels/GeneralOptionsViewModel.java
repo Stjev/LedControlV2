@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.stef.arduino.ledcontrolv2.LedMode;
+import com.stef.arduino.ledcontrolv2.enums.LedMode;
 
 public class GeneralOptionsViewModel extends ViewModel {
     private MutableLiveData<LedMode> ledMode;

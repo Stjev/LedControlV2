@@ -23,23 +23,23 @@
 
     <fragment
         android:id="@+id/colorCyclingFragment"
-        android:name="com.stef.arduino.ledcontrolv2.ui.fragments.ColorCyclingFragment"
+        android:name="com.stef.arduino.ledcontrolv2.ui.fragments.modes.ColorCyclingFragment"
         android:label="fragment_color_cycling"
         tools:layout="@layout/fragment_color_cycling" />
 
     <fragment
         android:id="@+id/soundReactiveFragment"
-        android:name="com.stef.arduino.ledcontrolv2.ui.fragments.SoundReactiveFragment"
+        android:name="com.stef.arduino.ledcontrolv2.ui.fragments.modes.SoundReactiveFragment"
         android:label="fragment_sound_reactive"
         tools:layout="@layout/fragment_sound_reactive" />
     <fragment
         android:id="@+id/starFragment"
-        android:name="com.stef.arduino.ledcontrolv2.ui.fragments.StarFragment"
+        android:name="com.stef.arduino.ledcontrolv2.ui.fragments.modes.StarFragment"
         android:label="fragment_star"
         tools:layout="@layout/fragment_star" />
     <fragment
         android:id="@+id/staticFragment"
-        android:name="com.stef.arduino.ledcontrolv2.ui.fragments.StaticFragment"
+        android:name="com.stef.arduino.ledcontrolv2.ui.fragments.modes.StaticFragment"
         android:label="fragment_static"
         tools:layout="@layout/fragment_static" />
 </navigation>

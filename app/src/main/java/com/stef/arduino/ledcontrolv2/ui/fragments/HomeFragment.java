@@ -9,12 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 
-import com.stef.arduino.ledcontrolv2.LedMode;
+import com.stef.arduino.ledcontrolv2.enums.LedMode;
 import com.stef.arduino.ledcontrolv2.R;
 import com.stef.arduino.ledcontrolv2.databinding.FragmentHomeBinding;
 import com.stef.arduino.ledcontrolv2.navigation.Navigator;
@@ -97,26 +96,4 @@ public class HomeFragment extends Fragment {
                 generalOptionsViewModel.setBrightness(seekBar.getProgress());
         }
     };
-
-    /**
-     * BindingAdapter for the data attribute from the spinner. This will set the data in the spinner
-     * @param view The spinner
-     * @param data A string array with the values for the spinner
-     */
-    @BindingAdapter({"data", "selectedPosition"})
-    public static void setData(Spinner view, String[] data, int pos) {
-        view.setAdapter(new ArrayAdapter<>(view.getContext(), R.layout.spinner_cell, data));
-        view.setSelection(pos);
-    }
-
-    /**
-     * BindingAdapter for the itemSelectedListener for the spinner. This will set the itemSelectedListener used
-     * by the itemSelectedListener
-     * @param view The spinner
-     * @param listener The itemSelectedListener to use when an item is selected
-     */
-    @BindingAdapter("itemSelectedListener")
-    public static void setItemSelectedListener(Spinner view, AdapterView.OnItemSelectedListener listener) {
-        view.setOnItemSelectedListener(listener);
-    }
 }

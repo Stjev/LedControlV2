@@ -1,4 +1,4 @@
-package com.stef.arduino.ledcontrolv2;
+package com.stef.arduino.ledcontrolv2.enums;
 
 public enum LedMode {
     SOUND_REACTIVE {

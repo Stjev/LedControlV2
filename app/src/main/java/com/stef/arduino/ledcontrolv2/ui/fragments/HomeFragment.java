@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import com.stef.arduino.ledcontrolv2.LedMode;
 import com.stef.arduino.ledcontrolv2.R;
 import com.stef.arduino.ledcontrolv2.databinding.FragmentHomeBinding;
+import com.stef.arduino.ledcontrolv2.navigation.Navigator;
 import com.stef.arduino.ledcontrolv2.viewmodels.GeneralOptionsViewModel;
 
 /**
@@ -54,8 +55,13 @@ public class HomeFragment extends Fragment {
     private AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            LedMode mode = LedMode.values()[position];
+
             if(generalOptionsViewModel != null)
-                generalOptionsViewModel.setLedMode(LedMode.values()[position]);
+                generalOptionsViewModel.setLedMode(mode);
+
+            if(getActivity() != null)
+                Navigator.navigateToOption(mode, getActivity());
         }
 
         @Override

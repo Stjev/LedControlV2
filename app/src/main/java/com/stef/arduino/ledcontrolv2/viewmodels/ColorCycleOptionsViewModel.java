@@ -14,7 +14,6 @@ public class ColorCycleOptionsViewModel extends ViewModel {
 
     public void setSpeed(Integer speed) {
         this.speed.setValue(speed);
-        System.out.println(speed);
     }
 
     public LiveData<Integer> getSpeed() {

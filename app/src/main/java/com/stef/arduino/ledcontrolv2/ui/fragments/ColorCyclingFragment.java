@@ -25,7 +25,6 @@ public class ColorCyclingFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,7 +35,7 @@ public class ColorCyclingFragment extends Fragment {
         colorCycleOptionsViewModel = ViewModelProviders.of(getActivity()).get(ColorCycleOptionsViewModel.class);
 
         binding.setSpeedListener(speedListener);
-        binding.setProgressChangedListener((SeekBar seekBar, int progress, boolean fromUser) -> {binding.setSpeed(progress);});
+        binding.setProgressChangedListener((SeekBar seekBar, int progress, boolean fromUser) -> binding.setSpeed(progress));
 
         // Inflate the layout for this fragment
         return binding.getRoot();

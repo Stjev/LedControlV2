@@ -44,6 +44,7 @@ public class SoundReactiveFragment extends Fragment {
         binding.setSelectedMode(soundReactiveViewModel.getReactiveMode().getValue().ordinal());
         binding.setSelectedColorListener(selectedColorListener);
         binding.setButtonClickListener(clickListener);
+        binding.setSelectedColor(soundReactiveViewModel.getColor().getValue());
         soundReactiveViewModel.getReactiveMode().observe(this, mode ->
             binding.setShowWheel(mode != null && mode.equals(SoundReactiveMode.BRIGHTNESS_MODE)));
 

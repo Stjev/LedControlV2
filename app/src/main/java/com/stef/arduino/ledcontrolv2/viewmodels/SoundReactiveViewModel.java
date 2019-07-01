@@ -14,7 +14,7 @@ public class SoundReactiveViewModel extends ViewModel {
         this.reactiveMode = new MutableLiveData<>();
         this.color = new MutableLiveData<>();
         this.reactiveMode.setValue(SoundReactiveMode.PROGRESSIVE_MODE);
-        this.color.setValue(0);
+        this.color.setValue(-1);
     }
 
     public LiveData<SoundReactiveMode> getReactiveMode() {

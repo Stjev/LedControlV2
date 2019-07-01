@@ -16,4 +16,15 @@ public class ColorPickerBindables {
     public static void setSelectedColorListener(ColorPickerView view, OnColorChangedListener listener) {
         view.addOnColorChangedListener(listener);
     }
+
+    /**
+     * This will set the selected color for the color picker view
+     * @param view the color picker view
+     * @param color the color to select
+     */
+    @BindingAdapter("selectedColor")
+    public static void setSelectedColor(ColorPickerView view, Integer color) {
+        if(color != null)
+            view.setInitialColor(color, false);
+    }
 }

@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment {
 
         generalOptionsViewModel = ViewModelProviders.of(getActivity()).get(GeneralOptionsViewModel.class);
 
-        // Set the led modes
+        // Set the bindings
         binding.setSpinnerModes(LedMode.getStringValues());
         binding.setSelectListener(itemSelectedListener);
         binding.setOnOffListener(onOffListener);

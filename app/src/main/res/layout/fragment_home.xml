@@ -64,6 +64,7 @@
             android:max="255"
             android:min="0"
             android:onStopTrackingTouch="@{brightnessListener::onStopTrackingTouch}"
+            android:progress="255"
             app:layout_constraintBottom_toBottomOf="@+id/switch1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/switch1"

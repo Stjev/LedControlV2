@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <import type="com.stef.arduino.ledcontrolv2.LedMode" />
         <variable
             name="spinnerModes"
             type="String[]" />
         <variable
             name="selectedModeVm"
-            type="com.stef.arduino.ledcontrolv2.viewmodels.SelectedModeViewModel" />
+            type="com.stef.arduino.ledcontrolv2.viewmodels.GeneralOptionsViewModel" />
         <variable
             name="selectListener"
             type="android.widget.AdapterView.OnItemSelectedListener" />
+        <variable
+            name="onOffListener"
+            type="android.widget.CompoundButton.OnCheckedChangeListener" />
+        <variable
+            name="brightnessListener"
+            type="android.widget.SeekBar.OnSeekBarChangeListener" />
     </data>
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/darkBackground"
@@ -29,6 +36,7 @@
             android:layout_marginEnd="16dp"
             android:popupBackground="@color/colorPrimaryDark"
             app:itemSelectedListener="@{selectListener}"
+            app:selectedPosition="@{LedMode.getInitialValue().ordinal()}"
             app:data="@{spinnerModes}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +51,7 @@
             android:fontFamily="sans-serif-light"
             android:text="@string/leds"
             android:textColor="#FFFFFF"
+            android:onCheckedChanged="@{onOffListener}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,10 +61,25 @@
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:max="255"
+            android:min="0"
+            android:onStopTrackingTouch="@{brightnessListener::onStopTrackingTouch}"
             app:layout_constraintBottom_toBottomOf="@+id/switch1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/switch1"
             app:layout_constraintTop_toTopOf="@+id/switch1" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/LightGrey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <fragment
             android:id="@+id/fragment"
@@ -69,7 +93,20 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner"
+            app:layout_constraintTop_toBottomOf="@+id/view"
             app:navGraph="@navigation/nav_graph" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-light"
+            android:text="OPTIONS:"
+            android:textColor="@color/DarkerTextColor"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
     </android.support.constraint.ConstraintLayout>
 </layout>

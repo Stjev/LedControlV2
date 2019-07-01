@@ -28,4 +28,12 @@ public enum LedMode {
 
         return data;
     }
+
+    /**
+     * This will return the initial value used as led mode for whenever none are selected yet
+     * @return the initial LedMode
+     */
+    public static LedMode getInitialValue() {
+        return LedMode.COLOR_CYCLE;
+    }
 }

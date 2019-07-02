@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Try connecting to the bluetooth device
         if(bluetooth == null) bluetooth = Bluetooth.getInstance(this);
-        bluetooth.startThreadAndConnect();
+        bluetooth.startThreadAndConnect(false);
     }
 
     @Override

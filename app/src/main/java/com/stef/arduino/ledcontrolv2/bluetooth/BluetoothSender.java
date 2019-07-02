@@ -25,22 +25,18 @@ public class BluetoothSender {
      * @param dataViewModel the specific dataviewModel to send the data over
      * @throws SocketException whenever the given socket is invalid, this is thrown.
      */
-    public void sendData(BluetoothSocket socket, BluetoothDataViewModel dataViewModel) throws SocketException {
+    public void sendData(BluetoothSocket socket, BluetoothDataViewModel dataViewModel) throws IOException {
         if(socket == null || ! socket.isConnected()) throw new SocketException("This socket is invalid.");
         else {
             Byte[] generalOptionsStream = generalOptionsViewModel.getDataBytes();
             Byte[] specificOptionsStream = dataViewModel.getDataBytes();
 
-            try {
-                OutputStream ostream = socket.getOutputStream();
+            OutputStream ostream = socket.getOutputStream();
 
-                // First write all the generalOptions
-                for (Byte data : generalOptionsStream) ostream.write(data);
-                // Then write all specific options
-                //for (Byte data : specificOptionsStream) ostream.write(data);
-            } catch (IOException e) {
-                throw new SocketException("Something went wrong trying to send the data.");
-            }
+            // First write all the generalOptions
+            for (Byte data : generalOptionsStream) ostream.write(data);
+            // Then write all specific options
+            //for (Byte data : specificOptionsStream) ostream.write(data);
         }
     }
 }

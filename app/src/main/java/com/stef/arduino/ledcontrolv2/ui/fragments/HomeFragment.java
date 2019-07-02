@@ -11,9 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 
-import com.stef.arduino.ledcontrolv2.bluetooth.Bluetooth;
 import com.stef.arduino.ledcontrolv2.enums.LedMode;
 import com.stef.arduino.ledcontrolv2.R;
 import com.stef.arduino.ledcontrolv2.databinding.FragmentHomeBinding;
@@ -27,9 +25,11 @@ import com.stef.arduino.ledcontrolv2.viewmodels.GeneralOptionsViewModel;
 public class HomeFragment extends Fragment {
     private GeneralOptionsViewModel generalOptionsViewModel;
     private BluetoothViewModel bluetoothViewModel;
+    private boolean initailizing;
 
     public HomeFragment() {
         // Required empty public constructor
+        initailizing = true;
     }
 
     @Override
@@ -65,11 +65,15 @@ public class HomeFragment extends Fragment {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             LedMode mode = LedMode.values()[position];
 
-            if(generalOptionsViewModel != null)
-                generalOptionsViewModel.setLedMode(mode);
+            if(initailizing) {
+                initailizing = false;
+            } else {
+                if(generalOptionsViewModel != null)
+                    generalOptionsViewModel.setLedMode(mode);
 
-            if(getActivity() != null)
-                Navigator.navigateToOption(mode, getActivity());
+                if(getActivity() != null)
+                    Navigator.navigateToOption(mode, getActivity());
+            }
         }
 
         @Override

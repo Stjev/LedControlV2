@@ -4,6 +4,7 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
+import android.bluetooth.BluetoothSocket;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
@@ -11,7 +12,7 @@ import com.stef.arduino.ledcontrolv2.bluetooth.Bluetooth;
 import com.stef.arduino.ledcontrolv2.bluetooth.BluetoothSender;
 import com.stef.arduino.ledcontrolv2.abstract_classes.BluetoothDataViewModel;
 
-import java.net.SocketException;
+import java.io.IOException;
 
 public class BluetoothViewModel extends ViewModel {
     private LiveData<Boolean> connected;
@@ -40,8 +41,9 @@ public class BluetoothViewModel extends ViewModel {
         BluetoothSender sender = new BluetoothSender(activity);
         try {
             sender.sendData(bluetoothRepo.getSocket(), viewModel);
-        } catch (SocketException e) {
-            Toast.makeText(activity, "Something went wrong while trying to send the data.", Toast.LENGTH_SHORT) .show();
+        } catch (IOException e) {
+            Toast.makeText(activity, "Something went wrong while trying to send the data.", Toast.LENGTH_SHORT).show();
+            bluetoothRepo.startThreadAndConnect(true);
         }
     }
 
@@ -49,6 +51,6 @@ public class BluetoothViewModel extends ViewModel {
      * This will try to connect to the arduino again
      */
     public void tryAgain() {
-        bluetoothRepo.startThreadAndConnect();
+        bluetoothRepo.startThreadAndConnect(false);
     }
 }

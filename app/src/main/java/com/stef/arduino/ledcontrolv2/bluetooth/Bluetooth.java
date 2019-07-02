@@ -53,17 +53,25 @@ public class Bluetooth {
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            discoverDevices();
+            BluetoothDevice device = discoverDevices();
+            if(device != null) {
+                socket = getConnectedSocket(device, false);
+            }
         }
     };
 
     /**
      * This will start a new thread and attempt to connect to the arduino
      */
-    public void startThreadAndConnect() {
+    public void startThreadAndConnect(boolean force) {
         new Thread() {
             @Override public void run() {
-                checkBluetoothOn();
+                if(checkBluetoothOn()) {
+                    BluetoothDevice device = discoverDevices();
+                    if(device != null) {
+                        socket = getConnectedSocket(device, force);
+                    }
+                }
             }
         }.start();
     }
@@ -72,7 +80,7 @@ public class Bluetooth {
      * Method to check whether the devices bluetooth is currently on. This will also try to detect
      * which bluetooth devices can be connected to.
      */
-    private void checkBluetoothOn() {
+    private boolean checkBluetoothOn() {
         // Set the value to false just until a connection is confirmed
         isConnected.postValue(false);
         hasError.postValue(null);
@@ -86,13 +94,13 @@ public class Bluetooth {
                 // this will make sure the devices only get discovered when the adapter is actually on
                 IntentFilter stateChangedFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
                 activity.registerReceiver(mReceiver, stateChangedFilter);
-            } else {
-                discoverDevices();
-            }
+            } else return true;
         } else {
             // The bluetooth device isn't available
             Toast.makeText(activity, "Bluetooth Device Not Available", Toast.LENGTH_LONG).show();
         }
+
+        return false;
     }
 
     public void unregister() {
@@ -105,41 +113,39 @@ public class Bluetooth {
     /**
      * Method to discover the devices
      */
-    private void discoverDevices(){
+    private BluetoothDevice discoverDevices(){
         Set<BluetoothDevice> bondedDevices = mAdapter.getBondedDevices();
-
-        boolean foundDevice = false;
 
         if(bondedDevices.size() > 0){
             for (BluetoothDevice bondedDevice : bondedDevices) {
                 // Try to instantly connect to the bluetooth module connected to the arduino
                 if(bondedDevice.getAddress().equals(MAC_ADDRESS)) {
-                    foundDevice = true;
                     // Device found, connect to it.
-                    this.socket = getConnectedSocket(bondedDevice);
+                    return bondedDevice;
                 }
             }
 
-            if(! foundDevice) {
-                hasError.postValue("The arduino can not be found.");
-            }
+            hasError.postValue("The arduino can not be found.");
         } else {
             hasError.postValue("No devices found to connect to.");
         }
+
+        return null;
     }
 
     /**
      * Actually connect to the device
-     * @param device the device to connect to
+     * @param device the device to connect to.
+     * @param force force a new socket.
      * @return the socket whenever the device has been connected
      */
-    private BluetoothSocket getConnectedSocket(BluetoothDevice device) {
+    private BluetoothSocket getConnectedSocket(BluetoothDevice device, boolean force) {
         ParcelUuid[] uuids = device.getUuids();
 
         BluetoothSocket newSocket = socket;
 
         // Only try to connect when the device isn't already connected
-        if(newSocket == null || !newSocket.isConnected()) {
+        if(newSocket == null || !newSocket.isConnected() || force) {
             try {
                 newSocket = device.createRfcommSocketToServiceRecord(uuids[0].getUuid());
 

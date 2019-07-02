@@ -26,9 +26,10 @@
         <variable
             name="errorMessage"
             type="String" />
+        <variable
+            name="retryConnectionListener"
+            type="android.view.View.OnClickListener" />
     </data>
-
-
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -125,6 +126,7 @@
             android:layout_height="match_parent"
             android:background="@color/transparentBackground"
             android:visibility="@{isConnected ? View.INVISIBLE : View.VISIBLE}"
+            android:clickable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -159,7 +161,8 @@
                 android:layout_marginBottom="70dp"
                 android:background="@drawable/button_style"
                 android:visibility="@{errorMessage == null ? View.INVISIBLE : View.VISIBLE}"
-                android:text="Try Again"
+                android:text="@string/try_again"
+                android:onClickListener="@{retryConnectionListener}"
                 android:textColor="@color/textColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

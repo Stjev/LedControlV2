@@ -26,4 +26,11 @@ public class BluetoothViewModel extends ViewModel {
     public LiveData<String> getError() {
         return error;
     }
+
+    /**
+     * This will try to connect to the arduino again
+     */
+    public void tryAgain() {
+        bluetoothRepo.startThreadAndConnect();
+    }
 }

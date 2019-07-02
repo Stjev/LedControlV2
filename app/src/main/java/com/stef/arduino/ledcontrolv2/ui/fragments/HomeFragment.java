@@ -13,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 
+import com.stef.arduino.ledcontrolv2.bluetooth.Bluetooth;
 import com.stef.arduino.ledcontrolv2.enums.LedMode;
 import com.stef.arduino.ledcontrolv2.R;
 import com.stef.arduino.ledcontrolv2.databinding.FragmentHomeBinding;
@@ -24,8 +25,8 @@ import com.stef.arduino.ledcontrolv2.viewmodels.GeneralOptionsViewModel;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-
     private GeneralOptionsViewModel generalOptionsViewModel;
+    private BluetoothViewModel bluetoothViewModel;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -38,13 +39,14 @@ public class HomeFragment extends Fragment {
         FragmentHomeBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
 
         generalOptionsViewModel = ViewModelProviders.of(getActivity()).get(GeneralOptionsViewModel.class);
-        BluetoothViewModel bluetoothViewModel = ViewModelProviders.of(this).get(BluetoothViewModel.class);
+        bluetoothViewModel = ViewModelProviders.of(this).get(BluetoothViewModel.class);
 
         // Set the bindings
         binding.setSpinnerModes(LedMode.getStringValues());
         binding.setSelectListener(itemSelectedListener);
         binding.setOnOffListener(onOffListener);
         binding.setBrightnessListener(brightnessListener);
+        binding.setRetryConnectionListener(retryConnectionListener);
 
         bluetoothViewModel.startListeningForConnection(getActivity(), this);
         bluetoothViewModel.getConnected().observe(this, binding::setIsConnected);
@@ -100,6 +102,18 @@ public class HomeFragment extends Fragment {
         public void onStopTrackingTouch(SeekBar seekBar) {
             if(generalOptionsViewModel != null)
                 generalOptionsViewModel.setBrightness(seekBar.getProgress());
+        }
+    };
+
+    /**
+     * This is the listener for whenever the bluetooth connection has failed and the user clicks on the try
+     * again button
+     */
+    private View.OnClickListener retryConnectionListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(bluetoothViewModel != null)
+                bluetoothViewModel.tryAgain();
         }
     };
 }

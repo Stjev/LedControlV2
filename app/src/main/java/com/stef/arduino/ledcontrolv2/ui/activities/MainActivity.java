@@ -1,6 +1,5 @@
 package com.stef.arduino.ledcontrolv2.ui.activities;
 
-import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -23,12 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Try connecting to the bluetooth device
         if(bluetooth == null) bluetooth = Bluetooth.getInstance(this);
-        new Thread() {
-            @Override public void run() {
-                Looper.prepare();
-                bluetooth.checkBluetoothOn();
-            }
-        }.start();
+        bluetooth.startThreadAndConnect();
     }
 
     @Override

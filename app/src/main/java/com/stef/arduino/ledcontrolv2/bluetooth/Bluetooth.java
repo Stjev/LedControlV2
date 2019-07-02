@@ -10,6 +10,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Looper;
 import android.os.ParcelUuid;
 import android.util.Log;
 import android.widget.Toast;
@@ -57,6 +58,17 @@ public class Bluetooth {
             discoverDevices();
         }
     };
+
+    /**
+     * This will start a new thread and attempt to connect to the arduino
+     */
+    public void startThreadAndConnect() {
+        new Thread() {
+            @Override public void run() {
+                checkBluetoothOn();
+            }
+        }.start();
+    }
 
     /**
      * Method to check whether the devices bluetooth is currently on. This will also try to detect
@@ -155,8 +167,6 @@ public class Bluetooth {
         isConnected.postValue(true);
         hasError.postValue(null);
 
-        // send a message to let the user know the connection has been established
-        Toast.makeText(activity, "Connection established", Toast.LENGTH_SHORT).show();
         return newSocket;
     }
 }

@@ -4,7 +4,9 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-public class ColorCycleOptionsViewModel extends ViewModel {
+import com.stef.arduino.ledcontrolv2.interfaces.BluetoothDataViewModel;
+
+public class ColorCycleOptionsViewModel extends ViewModel implements BluetoothDataViewModel {
     private MutableLiveData<Integer> speed;
 
     public ColorCycleOptionsViewModel() {
@@ -18,5 +20,12 @@ public class ColorCycleOptionsViewModel extends ViewModel {
 
     public LiveData<Integer> getSpeed() {
         return speed;
+    }
+
+    @Override
+    public Byte[] getDataBytes() {
+        //TODO: Implement
+
+        return new Byte[0];
     }
 }

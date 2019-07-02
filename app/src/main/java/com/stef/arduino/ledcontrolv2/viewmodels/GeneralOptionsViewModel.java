@@ -5,8 +5,9 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.stef.arduino.ledcontrolv2.enums.LedMode;
+import com.stef.arduino.ledcontrolv2.interfaces.BluetoothDataViewModel;
 
-public class GeneralOptionsViewModel extends ViewModel {
+public class GeneralOptionsViewModel extends ViewModel implements BluetoothDataViewModel {
     private MutableLiveData<LedMode> ledMode;
     private MutableLiveData<Integer> brightness;
     // Keep track of the current state
@@ -44,5 +45,12 @@ public class GeneralOptionsViewModel extends ViewModel {
 
     public LiveData<LedMode> getLedMode() {
         return this.ledMode;
+    }
+
+    @Override
+    public Byte[] getDataBytes() {
+        //TODO: Implement
+
+        return new Byte[0];
     }
 }

@@ -5,8 +5,9 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.stef.arduino.ledcontrolv2.enums.SoundReactiveMode;
+import com.stef.arduino.ledcontrolv2.interfaces.BluetoothDataViewModel;
 
-public class SoundReactiveViewModel extends ViewModel {
+public class SoundReactiveViewModel extends ViewModel implements BluetoothDataViewModel {
     private MutableLiveData<SoundReactiveMode> reactiveMode;
     private MutableLiveData<Integer> color;
 
@@ -29,5 +30,12 @@ public class SoundReactiveViewModel extends ViewModel {
 
     public void setColor(Integer color) {
         this.color.setValue(color);
+    }
+
+    @Override
+    public Byte[] getDataBytes() {
+        //TODO: implement
+
+        return new Byte[0];
     }
 }

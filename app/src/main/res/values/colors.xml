@@ -7,4 +7,5 @@
     <color name="LightGrey">#929292</color>
     <color name="textColor">#FFFFFF</color>
     <color name="DarkerTextColor">#BBBBBB</color>
+    <color name="transparentBackground">#DC616161</color>
 </resources>

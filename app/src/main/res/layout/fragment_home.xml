@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="com.stef.arduino.ledcontrolv2.enums.LedMode" />
+        <import type="android.view.View" />
         <variable
             name="spinnerModes"
             type="String[]" />
@@ -19,7 +20,15 @@
         <variable
             name="brightnessListener"
             type="android.widget.SeekBar.OnSeekBarChangeListener" />
+        <variable
+            name="isConnected"
+            type="Boolean" />
+        <variable
+            name="errorMessage"
+            type="String" />
     </data>
+
+
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -110,5 +119,87 @@
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparentBackground"
+            android:visibility="@{isConnected ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="sans-serif-light"
+                android:text="@{errorMessage}"
+                android:textAlignment="center"
+                android:textColor="@color/textColor"
+                android:textSize="24sp"
+                android:visibility="@{errorMessage == null ? View.INVISIBLE : View.VISIBLE}"
+                app:layout_constraintBottom_toTopOf="@+id/button2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="70dp"
+                android:layout_marginEnd="70dp"
+                android:layout_marginBottom="70dp"
+                android:background="@drawable/button_style"
+                android:visibility="@{errorMessage == null ? View.INVISIBLE : View.VISIBLE}"
+                android:text="Try Again"
+                android:textColor="@color/textColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="160dp"
+                android:layout_height="127dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="@{errorMessage == null ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="sans-serif-light"
+                android:text="Connecting..."
+                android:textColor="@color/textColor"
+                android:textSize="30sp"
+                android:visibility="@{errorMessage == null ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintBottom_toTopOf="@+id/progressBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+        </android.support.constraint.ConstraintLayout>
+
     </android.support.constraint.ConstraintLayout>
 </layout>

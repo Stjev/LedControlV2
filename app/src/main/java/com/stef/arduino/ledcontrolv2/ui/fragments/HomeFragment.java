@@ -17,6 +17,7 @@ import com.stef.arduino.ledcontrolv2.enums.LedMode;
 import com.stef.arduino.ledcontrolv2.R;
 import com.stef.arduino.ledcontrolv2.databinding.FragmentHomeBinding;
 import com.stef.arduino.ledcontrolv2.navigation.Navigator;
+import com.stef.arduino.ledcontrolv2.viewmodels.BluetoothViewModel;
 import com.stef.arduino.ledcontrolv2.viewmodels.GeneralOptionsViewModel;
 
 /**
@@ -37,12 +38,17 @@ public class HomeFragment extends Fragment {
         FragmentHomeBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
 
         generalOptionsViewModel = ViewModelProviders.of(getActivity()).get(GeneralOptionsViewModel.class);
+        BluetoothViewModel bluetoothViewModel = ViewModelProviders.of(this).get(BluetoothViewModel.class);
 
         // Set the bindings
         binding.setSpinnerModes(LedMode.getStringValues());
         binding.setSelectListener(itemSelectedListener);
         binding.setOnOffListener(onOffListener);
         binding.setBrightnessListener(brightnessListener);
+
+        bluetoothViewModel.startListeningForConnection(getActivity(), this);
+        bluetoothViewModel.getConnected().observe(this, binding::setIsConnected);
+        bluetoothViewModel.getError().observe(this, binding::setErrorMessage);
 
         // Inflate the layout for this fragment
         return binding.getRoot();

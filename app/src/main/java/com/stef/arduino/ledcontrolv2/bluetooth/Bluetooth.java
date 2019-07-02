@@ -10,9 +10,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Looper;
 import android.os.ParcelUuid;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -74,7 +72,7 @@ public class Bluetooth {
      * Method to check whether the devices bluetooth is currently on. This will also try to detect
      * which bluetooth devices can be connected to.
      */
-    public void checkBluetoothOn() {
+    private void checkBluetoothOn() {
         // Set the value to false just until a connection is confirmed
         isConnected.postValue(false);
         hasError.postValue(null);

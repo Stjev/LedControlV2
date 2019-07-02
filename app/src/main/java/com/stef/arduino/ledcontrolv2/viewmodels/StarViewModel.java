@@ -35,8 +35,9 @@ public class StarViewModel extends ViewModel implements BluetoothDataViewModel {
 
     @Override
     public Byte[] getDataBytes() {
-        //TODO: Implement
+        byte count = (byte)(starCount.getValue() & 0xFF);
+        byte speed = (byte)(starSpeed.getValue() & 0xFF);
 
-        return new Byte[0];
+        return new Byte[] {count, speed};
     }
 }

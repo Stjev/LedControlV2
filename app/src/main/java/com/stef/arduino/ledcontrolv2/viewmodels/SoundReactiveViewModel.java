@@ -3,6 +3,7 @@ package com.stef.arduino.ledcontrolv2.viewmodels;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.graphics.Color;
 
 import com.stef.arduino.ledcontrolv2.enums.SoundReactiveMode;
 import com.stef.arduino.ledcontrolv2.interfaces.BluetoothDataViewModel;
@@ -34,8 +35,17 @@ public class SoundReactiveViewModel extends ViewModel implements BluetoothDataVi
 
     @Override
     public Byte[] getDataBytes() {
-        //TODO: implement
+        byte mode = (byte) reactiveMode.getValue().ordinal();
 
-        return new Byte[0];
+        if(reactiveMode.getValue() == SoundReactiveMode.PROGRESSIVE_MODE) {
+            return new Byte[] {mode};
+        } else {
+            Color color = Color.valueOf(this.color.getValue());
+            byte red = (byte) ((int)color.red() & 0xFF);
+            byte green = (byte) ((int)color.green() & 0xFF);
+            byte blue = (byte) ((int)color.blue() & 0xFF);
+
+            return new Byte[] {mode, red, green, blue};
+        }
     }
 }

@@ -49,8 +49,9 @@ public class GeneralOptionsViewModel extends ViewModel implements BluetoothDataV
 
     @Override
     public Byte[] getDataBytes() {
-        //TODO: Implement
+        byte mode = (byte)ledMode.getValue().ordinal();
+        byte brightness = (byte) (this.brightness.getValue() & 0xFF);
 
-        return new Byte[0];
+        return new Byte[] {mode, brightness};
     }
 }

@@ -24,8 +24,6 @@ public class ColorCycleOptionsViewModel extends ViewModel implements BluetoothDa
 
     @Override
     public Byte[] getDataBytes() {
-        //TODO: Implement
-
-        return new Byte[0];
+        return new Byte[] {(byte) (speed.getValue() & 0xFF)};
     }
 }

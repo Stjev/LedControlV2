@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import com.stef.arduino.ledcontrolv2.viewmodels.BluetoothViewModel;
 
 public abstract class BluetoothDataViewModel extends ViewModel {
-    public abstract Byte[] getDataBytes();
+    public abstract byte[] getDataBytes();
 
     private BluetoothViewModel bluetoothViewModel;
     private FragmentActivity activity;

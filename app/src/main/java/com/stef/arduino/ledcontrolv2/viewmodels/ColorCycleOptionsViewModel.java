@@ -23,7 +23,7 @@ public class ColorCycleOptionsViewModel extends BluetoothDataViewModel {
     }
 
     @Override
-    public Byte[] getDataBytes() {
-        return new Byte[] {(byte) (speed.getValue() & 0xFF)};
+    public byte[] getDataBytes() {
+        return new byte[] {(byte) (speed.getValue() & 0xFF)};
     }
 }

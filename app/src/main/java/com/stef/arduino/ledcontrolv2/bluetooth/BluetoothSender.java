@@ -28,15 +28,36 @@ public class BluetoothSender {
     public void sendData(BluetoothSocket socket, BluetoothDataViewModel dataViewModel) throws IOException {
         if(socket == null || ! socket.isConnected()) throw new SocketException("This socket is invalid.");
         else {
-            Byte[] generalOptionsStream = generalOptionsViewModel.getDataBytes();
-            Byte[] specificOptionsStream = dataViewModel.getDataBytes();
+            byte[] generalOptionsStream = generalOptionsViewModel.getDataBytes();
+            byte[] specificOptionsStream = dataViewModel.getDataBytes();
 
-            OutputStream ostream = socket.getOutputStream();
+            new Thread() {
+                @Override
+                public void run() {
+                    OutputStream ostream;
+                    try {
+                        ostream = socket.getOutputStream();
 
-            // First write all the generalOptions
-            for (Byte data : generalOptionsStream) ostream.write(data);
-            // Then write all specific options
-            for (Byte data : specificOptionsStream) ostream.write(data);
+                        for(byte i = 0; i < generalOptionsStream.length; i++) {
+                            // First write all the generalOptions then the specific options
+                            ostream.write(generalOptionsStream[i]);
+                            Thread.sleep(5);
+                        }
+
+                        for(byte i = 0; i < specificOptionsStream.length; i++) {
+                            // First write all the generalOptions then the specific options
+                            ostream.write(specificOptionsStream[i]);
+                            Thread.sleep(5);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.start();
+
+
         }
     }
 }

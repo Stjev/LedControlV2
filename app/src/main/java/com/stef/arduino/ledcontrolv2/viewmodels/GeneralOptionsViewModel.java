@@ -73,10 +73,10 @@ public class GeneralOptionsViewModel extends BluetoothDataViewModel {
     }
 
     @Override
-    public Byte[] getDataBytes() {
+    public byte[] getDataBytes() {
         byte mode = (byte)ledMode.getValue().ordinal();
         byte brightness = (byte) (this.brightness.getValue() & 0xFF);
 
-        return new Byte[] {mode, brightness};
+        return new byte[] {mode, brightness};
     }
 }

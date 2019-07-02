@@ -23,12 +23,12 @@ public class StaticViewModel extends BluetoothDataViewModel {
     }
 
     @Override
-    public Byte[] getDataBytes() {
+    public byte[] getDataBytes() {
         Integer color = this.color.getValue();
         byte red = (byte) ((color >> 16) & 0xFF);
         byte green = (byte) ((color >> 8) & 0xFF);
         byte blue = (byte) (color & 0xFF);
 
-        return new Byte[] {red, green, blue};
+        return new byte[] {red, green, blue};
     }
 }

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.flask.colorpicker.OnColorChangedListener;
 import com.stef.arduino.ledcontrolv2.R;
 import com.stef.arduino.ledcontrolv2.databinding.FragmentStaticBinding;
+import com.stef.arduino.ledcontrolv2.viewmodels.BluetoothViewModel;
 import com.stef.arduino.ledcontrolv2.viewmodels.StaticViewModel;
 
 /**
@@ -34,6 +35,7 @@ public class StaticFragment extends Fragment {
                 DataBindingUtil.inflate(inflater, R.layout.fragment_static, container, false);
 
         staticViewModel = ViewModelProviders.of(getActivity()).get(StaticViewModel.class);
+        staticViewModel.setActivity(getActivity());
 
         binding.setSelectedColor(staticViewModel.getColor().getValue());
         binding.setSelectedColorListener(colorChangedListener);

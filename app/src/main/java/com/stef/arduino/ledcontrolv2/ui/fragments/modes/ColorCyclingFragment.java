@@ -12,6 +12,7 @@ import android.widget.SeekBar;
 
 import com.stef.arduino.ledcontrolv2.R;
 import com.stef.arduino.ledcontrolv2.databinding.FragmentColorCyclingBinding;
+import com.stef.arduino.ledcontrolv2.viewmodels.BluetoothViewModel;
 import com.stef.arduino.ledcontrolv2.viewmodels.ColorCycleOptionsViewModel;
 
 /**
@@ -33,6 +34,7 @@ public class ColorCyclingFragment extends Fragment {
                 DataBindingUtil.inflate(inflater, R.layout.fragment_color_cycling, container, false);
 
         colorCycleOptionsViewModel = ViewModelProviders.of(getActivity()).get(ColorCycleOptionsViewModel.class);
+        colorCycleOptionsViewModel.setActivity(getActivity());
 
         binding.setSpeedListener(speedListener);
         binding.setSpeed(colorCycleOptionsViewModel.getSpeed().getValue());

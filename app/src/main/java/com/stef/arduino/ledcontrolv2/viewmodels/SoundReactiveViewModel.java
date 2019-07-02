@@ -2,13 +2,12 @@ package com.stef.arduino.ledcontrolv2.viewmodels;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
 import android.graphics.Color;
 
 import com.stef.arduino.ledcontrolv2.enums.SoundReactiveMode;
-import com.stef.arduino.ledcontrolv2.interfaces.BluetoothDataViewModel;
+import com.stef.arduino.ledcontrolv2.abstract_classes.BluetoothDataViewModel;
 
-public class SoundReactiveViewModel extends ViewModel implements BluetoothDataViewModel {
+public class SoundReactiveViewModel extends BluetoothDataViewModel {
     private MutableLiveData<SoundReactiveMode> reactiveMode;
     private MutableLiveData<Integer> color;
 
@@ -27,10 +26,12 @@ public class SoundReactiveViewModel extends ViewModel implements BluetoothDataVi
 
     public void setReactiveMode(SoundReactiveMode reactiveMode) {
         this.reactiveMode.setValue(reactiveMode);
+        this.sendData();
     }
 
     public void setColor(Integer color) {
         this.color.setValue(color);
+        this.sendData();
     }
 
     @Override

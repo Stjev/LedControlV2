@@ -16,6 +16,7 @@ import com.flask.colorpicker.OnColorChangedListener;
 import com.stef.arduino.ledcontrolv2.enums.SoundReactiveMode;
 import com.stef.arduino.ledcontrolv2.R;
 import com.stef.arduino.ledcontrolv2.databinding.FragmentSoundReactiveBinding;
+import com.stef.arduino.ledcontrolv2.viewmodels.BluetoothViewModel;
 import com.stef.arduino.ledcontrolv2.viewmodels.SoundReactiveViewModel;
 
 /**
@@ -37,6 +38,7 @@ public class SoundReactiveFragment extends Fragment {
                 DataBindingUtil.inflate(inflater, R.layout.fragment_sound_reactive, container, false);
 
         soundReactiveViewModel = ViewModelProviders.of(getActivity()).get(SoundReactiveViewModel.class);
+        soundReactiveViewModel.setActivity(getActivity());
 
         // Bindings
         binding.setSoundReactiveModes(SoundReactiveMode.getStringValues());

@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.bluetooth.BluetoothSocket;
 import android.support.v4.app.FragmentActivity;
 
-import com.stef.arduino.ledcontrolv2.interfaces.BluetoothDataViewModel;
+import com.stef.arduino.ledcontrolv2.abstract_classes.BluetoothDataViewModel;
 import com.stef.arduino.ledcontrolv2.viewmodels.GeneralOptionsViewModel;
 
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class BluetoothSender {
                 // First write all the generalOptions
                 for (Byte data : generalOptionsStream) ostream.write(data);
                 // Then write all specific options
-                for (Byte data : specificOptionsStream) ostream.write(data);
+                //for (Byte data : specificOptionsStream) ostream.write(data);
             } catch (IOException e) {
                 throw new SocketException("Something went wrong trying to send the data.");
             }

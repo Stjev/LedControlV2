@@ -167,4 +167,8 @@ public class Bluetooth {
 
         return newSocket;
     }
+
+    public BluetoothSocket getSocket() {
+        return socket;
+    }
 }

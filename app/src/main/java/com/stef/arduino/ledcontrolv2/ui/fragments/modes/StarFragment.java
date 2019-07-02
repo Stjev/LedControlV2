@@ -12,6 +12,7 @@ import android.widget.SeekBar;
 
 import com.stef.arduino.ledcontrolv2.R;
 import com.stef.arduino.ledcontrolv2.databinding.FragmentStarBinding;
+import com.stef.arduino.ledcontrolv2.viewmodels.BluetoothViewModel;
 import com.stef.arduino.ledcontrolv2.viewmodels.StarViewModel;
 
 /**
@@ -33,6 +34,7 @@ public class StarFragment extends Fragment {
                 DataBindingUtil.inflate(inflater, R.layout.fragment_star, container, false);
 
         starViewModel = ViewModelProviders.of(this).get(StarViewModel.class);
+        starViewModel.setActivity(getActivity());
 
         // Set the bindings
         binding.setSpeed(starViewModel.getStarSpeed().getValue());

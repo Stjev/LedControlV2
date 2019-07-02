@@ -2,11 +2,10 @@ package com.stef.arduino.ledcontrolv2.viewmodels;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
 
-import com.stef.arduino.ledcontrolv2.interfaces.BluetoothDataViewModel;
+import com.stef.arduino.ledcontrolv2.abstract_classes.BluetoothDataViewModel;
 
-public class ColorCycleOptionsViewModel extends ViewModel implements BluetoothDataViewModel {
+public class ColorCycleOptionsViewModel extends BluetoothDataViewModel {
     private MutableLiveData<Integer> speed;
 
     public ColorCycleOptionsViewModel() {
@@ -16,6 +15,7 @@ public class ColorCycleOptionsViewModel extends ViewModel implements BluetoothDa
 
     public void setSpeed(Integer speed) {
         this.speed.setValue(speed);
+        this.sendData();
     }
 
     public LiveData<Integer> getSpeed() {

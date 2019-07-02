@@ -39,7 +39,8 @@ public class HomeFragment extends Fragment {
         FragmentHomeBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
 
         generalOptionsViewModel = ViewModelProviders.of(getActivity()).get(GeneralOptionsViewModel.class);
-        bluetoothViewModel = ViewModelProviders.of(this).get(BluetoothViewModel.class);
+        generalOptionsViewModel.setActivity(getActivity());
+        bluetoothViewModel = ViewModelProviders.of(getActivity()).get(BluetoothViewModel.class);
 
         // Set the bindings
         binding.setSpinnerModes(LedMode.getStringValues());
@@ -48,7 +49,7 @@ public class HomeFragment extends Fragment {
         binding.setBrightnessListener(brightnessListener);
         binding.setRetryConnectionListener(retryConnectionListener);
 
-        bluetoothViewModel.startListeningForConnection(getActivity(), this);
+        bluetoothViewModel.initialize(getActivity(), this);
         bluetoothViewModel.getConnected().observe(this, binding::setIsConnected);
         bluetoothViewModel.getError().observe(this, binding::setErrorMessage);
 

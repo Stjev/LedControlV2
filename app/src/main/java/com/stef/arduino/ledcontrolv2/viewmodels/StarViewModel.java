@@ -2,11 +2,10 @@ package com.stef.arduino.ledcontrolv2.viewmodels;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
 
-import com.stef.arduino.ledcontrolv2.interfaces.BluetoothDataViewModel;
+import com.stef.arduino.ledcontrolv2.abstract_classes.BluetoothDataViewModel;
 
-public class StarViewModel extends ViewModel implements BluetoothDataViewModel {
+public class StarViewModel extends BluetoothDataViewModel {
     private MutableLiveData<Integer> starCount;
     private MutableLiveData<Integer> starSpeed;
 
@@ -27,10 +26,12 @@ public class StarViewModel extends ViewModel implements BluetoothDataViewModel {
 
     public void setStarCount(int starCount) {
         this.starCount.setValue(starCount);
+        this.sendData();
     }
 
     public void setStarSpeed(int starSpeed) {
         this.starSpeed.setValue(starSpeed);
+        this.sendData();
     }
 
     @Override

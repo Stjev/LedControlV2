@@ -3,8 +3,6 @@ package com.stef.arduino.ledcontrolv2.viewmodels;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProviders;
-import android.bluetooth.BluetoothSocket;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
@@ -18,15 +16,12 @@ public class BluetoothViewModel extends ViewModel {
     private LiveData<Boolean> connected;
     private LiveData<String> error;
     private Bluetooth bluetoothRepo;
-    private GeneralOptionsViewModel generalOptionsViewModel;
 
-    public void initialize(FragmentActivity activity, LifecycleOwner owner) {
+    public void initialize(FragmentActivity activity) {
         if(bluetoothRepo == null) bluetoothRepo = Bluetooth.getInstance(activity);
 
         connected = bluetoothRepo.getIsConnected();
         error = bluetoothRepo.getHasError();
-
-        generalOptionsViewModel = ViewModelProviders.of(activity).get(GeneralOptionsViewModel.class);
     }
 
     public LiveData<Boolean> getConnected() {

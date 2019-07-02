@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
         binding.setBrightnessListener(brightnessListener);
         binding.setRetryConnectionListener(retryConnectionListener);
 
-        bluetoothViewModel.initialize(getActivity(), this);
+        bluetoothViewModel.initialize(getActivity());
         bluetoothViewModel.getConnected().observe(this, binding::setIsConnected);
         bluetoothViewModel.getError().observe(this, binding::setErrorMessage);
 

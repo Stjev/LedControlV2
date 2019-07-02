@@ -41,10 +41,10 @@ public class SoundReactiveViewModel extends BluetoothDataViewModel {
         if(reactiveMode.getValue() == SoundReactiveMode.PROGRESSIVE_MODE) {
             return new Byte[] {mode};
         } else {
-            Color color = Color.valueOf(this.color.getValue());
-            byte red = (byte) ((int)color.red() & 0xFF);
-            byte green = (byte) ((int)color.green() & 0xFF);
-            byte blue = (byte) ((int)color.blue() & 0xFF);
+            Integer color = this.color.getValue();
+            byte red = (byte) ((color >> 16) & 0xFF);
+            byte green = (byte) ((color >> 8) & 0xFF);
+            byte blue = (byte) (color & 0xFF);
 
             return new Byte[] {mode, red, green, blue};
         }

@@ -2,7 +2,6 @@ package com.stef.arduino.ledcontrolv2.viewmodels;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.graphics.Color;
 
 import com.stef.arduino.ledcontrolv2.abstract_classes.BluetoothDataViewModel;
 
@@ -25,11 +24,10 @@ public class StaticViewModel extends BluetoothDataViewModel {
 
     @Override
     public Byte[] getDataBytes() {
-        Color color = Color.valueOf(this.color.getValue());
-
-        byte red = (byte) ((int)color.red() & 0xFF);
-        byte green = (byte) ((int)color.green() & 0xFF);
-        byte blue = (byte) ((int)color.blue() & 0xFF);
+        Integer color = this.color.getValue();
+        byte red = (byte) ((color >> 16) & 0xFF);
+        byte green = (byte) ((color >> 8) & 0xFF);
+        byte blue = (byte) (color & 0xFF);
 
         return new Byte[] {red, green, blue};
     }

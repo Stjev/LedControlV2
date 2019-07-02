@@ -36,7 +36,7 @@ public class BluetoothSender {
             // First write all the generalOptions
             for (Byte data : generalOptionsStream) ostream.write(data);
             // Then write all specific options
-            //for (Byte data : specificOptionsStream) ostream.write(data);
+            for (Byte data : specificOptionsStream) ostream.write(data);
         }
     }
 }
